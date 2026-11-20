@@ -6,6 +6,21 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <h2>choose a quiz</h2>
+  <form action="">
+    <!-- Pilihan quiz -->
+  <select name="" id="">
+      {% for id, name in quiz_list %} <!-- Jinja Feature -->
+    <option value="{[id}}">{{name}}</option>
+      {% endfor %}
+  </select>
+
+  <!-- Tombol Submit -->
+  <p>
+    <input type="submit" value="OK!">
+  </p>
+
+  </form>
+
 </body>
 </html>

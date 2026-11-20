@@ -176,15 +176,35 @@ def get_question_after(question_id = 0, quiz_id=1):
   close()
   return result
 
-  def get_quiz():
+def get_quiz():
     query = '''
-    SELECT * FROM quiz ORDER quiz ORDER BY id
+    SELECT * FROM quiz ORDER BY id
     '''
     open()
     cursor.execute(query)
     result = cursor.fetchall()
     close()
     return result
+
+def check_answer(q_id, ans_text):
+    query = '''
+        SELECT questions.answer
+        FROM quiz_content, questions
+        WHERE quiz_content.id = ?
+        AND quiz_content.question_id = questions.id
+    '''
+    open()
+    cursor.execute(query, str(q_id))
+    result = cursor.fetchone()
+    close()
+  
+    if result is None:
+        return False
+    else:
+        if result[0] == ans_text:
+            return True #jwbn benar
+        else:
+            return False #jwbn salah
     
 ## Entry Point untuk menjalankan program
 def main():
