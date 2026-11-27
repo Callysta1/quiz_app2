@@ -9,7 +9,7 @@ from random import randint, shuffle
 def start_quiz(quiz_id):
     session['quiz'] = quiz_id
     session['last_question'] = 0
-    session['answer'] = 0
+    session['answers'] = 0
     session['total'] = 0
 
 def end_quiz():
@@ -38,7 +38,7 @@ def index():
 
 # === TEST UTILITY START - TEST PAGE ===
 def question_form(question):
-    answer_list, = [
+    answers_list = [
         question[2],
         question[3],
         question[4],
@@ -46,9 +46,9 @@ def question_form(question):
     ]
     shuffle(answer_list)
     return render_template(
-        'test.html'
+        'test.html',
         question=question[1],
-        question=question[0],
+        quest_id=question[0],
         answers_list = answers_list
     )
 
@@ -60,14 +60,14 @@ def save_answers():
     session['total'] +=1
 
     if check_answer(quest_id, answer):
-        session['answer'] +=1
+        session['answers'] +=1
 
 def test():
-    if not('quiz' in session) or int(session['quiz'] < 0):
+    if not('quiz' in session) or int(session['quiz']) < 0:
        return redirect(url_for('index'))
     else:
         if request.method == 'POST':
-            save_answer()
+            save_answers()
 
         next_question = get_question_after(session['last_question'], session['quiz'])
         if next_question is None or len(next_question) == 0:

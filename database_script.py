@@ -194,16 +194,19 @@ def check_answer(q_id, ans_text):
         AND quiz_content.question_id = questions.id
     '''
     open()
-    cursor.execute(query, str(q_id))
+    cursor.execute(query, (q_id,))
     result = cursor.fetchone()
     close()
   
     if result is None:
+        print ("false 1") 
         return False
     else:
         if result[0] == ans_text:
+            print ("false 2") 
             return True #jwbn benar
         else:
+            print ("false 3")
             return False #jwbn salah
     
 ## Entry Point untuk menjalankan program

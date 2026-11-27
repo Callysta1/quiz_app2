@@ -7,9 +7,9 @@
 </head>
 <body>
   <h2>choose a quiz</h2>
-  <form action="">
+  <form action="/" method="post">
     <!-- Pilihan quiz -->
-  <select name="" id="">
+  <select name="quiz">
       {% for id, name in quiz_list %} <!-- Jinja Feature -->
     <option value="{[id}}">{{name}}</option>
       {% endfor %}
